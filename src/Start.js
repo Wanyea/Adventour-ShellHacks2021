@@ -1,5 +1,6 @@
 import { React, useState } from 'react';
 import styled from 'styled-components';
+import SimpleMap from './SimpleMap';
 
 
 const StartAdventure = styled.div`
@@ -51,7 +52,6 @@ const StartAdventure = styled.div`
 
 export default function WelcomeSection() {
     const [user,setUser] = useState({location: "", date : ""});
-    const [message, setMessage] = useState(null);
 
     const onChange = e =>{
         setUser({...user,[e.target.name] : e.target.value});
@@ -82,6 +82,8 @@ export default function WelcomeSection() {
                         type="submit"> Plan my adventure! </button>
             </form>
         </div>
+        <SimpleMap/>
         </StartAdventure>
+
     )
-};
+}

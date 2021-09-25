@@ -1,7 +1,6 @@
-import { React, useState } from 'react';
-import { NavLink, Link } from 'react-router-dom';
+import { React } from 'react';
+import { Link } from 'react-router-dom';
 import styled from 'styled-components';
-import nav from "./nav2.jpeg";
 
 const NavMenuStyle = styled.div`
   .header {
@@ -69,4 +68,4 @@ export default function Header(props) {
 </div>
 </NavMenuStyle> 
 )
-};
+}
