@@ -3,7 +3,10 @@ import React from 'react'
 function HomePage() {
     const time = new Date().getHours();
     let greetingMessage = 'Hello Wanyea'
+    setGreeting()
+    
 
+function setGreeting() {
     //Morning
     if(time < 12) {
         greetingMessage = "Good Morning Wanyea"
@@ -18,21 +21,23 @@ function HomePage() {
     } else {
         greetingMessage = 'Hello Wanyea'
     }
+}
 
+function displayMessage() {
+    console.log("Hey, this button works!")
+}
 
     return (
         <div className="home">
-            <h2> This is the center of the page. {greetingMessage} </h2>
+            <h2> This is the center of the page. </h2>
+            <h2> {greetingMessage} </h2>
+                <br />
+            
+            <button onClick={displayMessage}> Start! </button>
+            
         </div>
     )
 }
-
-// function checkTime() {
-//     const time = new Date().getDate();
-//     return (
-//         console.log(time)
-//     )
-// }
 
 export default HomePage
 
