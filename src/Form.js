@@ -1,11 +1,64 @@
 import React from 'react';
+import { useState, useEffect } from 'react';
 import './Form.css';
 import GetLocation from './GetLocation';
 import Geocode from "react-geocode";
 import PlacesAutocomplete, { geocodeByAddress, getLatLng } from "react-places-autocomplete";
 import { useHistory } from 'react-router-dom';
+import { getPlacesData } from './travelAPI';
+import { CssBaseline, Grid } from '@material-ui/core';
+import List from './List';
 
 function Form(props) {
+  const [type, setType] = useState('restaurants');
+  const [rating, setRating] = useState('');
+
+  //const [coords, setCoords] = useState({});
+  const [bounds, setBounds] = useState(null);
+
+  const [filteredPlaces, setFilteredPlaces] = useState([]);
+  const [places, setPlaces] = useState([]);
+
+  const [autocomplete, setAutocomplete] = useState(null);
+  const [childClicked, setChildClicked] = useState(null);
+  const [isLoading, setIsLoading] = useState(false);
+
+  useEffect(() => {
+    navigator.geolocation.getCurrentPosition(({ coordinates: { latitude, longitude } }) => {
+      setCoordinates({ lat: latitude, lng: longitude });
+    });
+  }, []);
+
+  useEffect(() => {
+    const filtered = places.filter((place) => Number(place.rating) > rating);
+
+    setFilteredPlaces(filtered);
+  }, [places, rating]);
+
+  useEffect(() => {
+    if (bounds) {
+      setIsLoading(true);
+
+      getPlacesData(coordinates, 25)
+        .then((data) => {
+          setPlaces(data.filter((place) => place.name && place.num_reviews > 0));
+          setFilteredPlaces([]);
+          setRating('');
+          setIsLoading(false);
+        });
+    }
+  }, [bounds]);
+
+  const onLoad = (autoC) => setAutocomplete(autoC);
+
+  const onPlaceChanged = () => {
+    const lat = coordinates.lat;
+    const lng = coordinates.lng;
+
+    setCoordinates({ lat, lng });
+  };
+
+  // old 
   const location = GetLocation().coordinates;
   const history = useHistory()
 
@@ -53,9 +106,13 @@ function Form(props) {
         lat: coordinates.lat,
         long: coordinates.lng,
       }
-      console.log(formData);
+      //console.log(formData);
       
-      history.push('/itinerary');
+      let brr = getPlacesData(coordinates, formData.range);
+      console.log(brr);
+      onPlaceChanged();
+
+     // history.push('/itinerary');
     };
 
  
@@ -100,6 +157,27 @@ function Form(props) {
          <button type="submit" className="myButton">Plan My Adventure!</button>
        </form>
     <button type="text" className="useMyLocation" onClick={assignAddress}>Use My Location.</button>
+
+    <>
+      <CssBaseline />
+      <Grid container spacing={3} style={{ width: '100%' }}>
+        <Grid item xs={12} md={4}>
+          <List
+            isLoading={isLoading}
+            childClicked={childClicked}
+            places={filteredPlaces.length ? filteredPlaces : places}
+            type='attractions'
+            setType={setType}
+            rating={rating}
+            setRating={setRating}
+          />
+        </Grid>
+        <Grid item xs={12} md={8} style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+        </Grid>
+      </Grid>
+    </>
+
+
     </div>
      );
   }
