@@ -19,15 +19,9 @@ const NavMenuStyle = styled.div`
 }
 
 .nav-logo {
-<<<<<<< HEAD
-    height: 72px;
-    width: 85px;
-    margin-left: 15%;
-=======
     height: 99px;
     width: 100px;
     margin-left: 45%;
->>>>>>> 7eae41862f9e187ee278983e2277ee2cee30eea9
     align-items: left;
 }
 
