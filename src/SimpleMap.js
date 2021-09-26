@@ -11,7 +11,6 @@ const SimpleMap = () => {
   Geocode.fromLatLng(location.lat.toString(), location.lng.toString()).then(
     (response) => {
       const address = response.results[0].formatted_address
-      console.log(address)
     },
     (error) => {
       console.log(error)
