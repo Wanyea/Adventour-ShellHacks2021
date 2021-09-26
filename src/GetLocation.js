@@ -18,7 +18,7 @@ const GetLocation = () => {
 
     const onError = error => {
         setLocation({
-            loaded: true, 
+            loaded: false, 
             error,
             coordinates: {
                 lat: 29.5845,
