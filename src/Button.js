@@ -12,8 +12,8 @@ const ButtonStyle = styled.div`
     border-radius: 25px;
     display: inline-block;
     color: black;
-    margin-left: 50%;
-    margin-top: 75%;
+    margin-left: 35%;
+    margin-bottom: 70%;
   }
   @media only screen and (max-width: 768px) {
     .button {
