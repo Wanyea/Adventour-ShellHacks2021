@@ -24,7 +24,6 @@ const SimpleMap = () => {
     lat: location.lat , lng: location.lng
   }
   
-  
   return (
      <LoadScript
        googleMapsApiKey='AIzaSyBhMbvP6pFgIOQ1IdsvqoYBxFbA4W-Ir2k'>

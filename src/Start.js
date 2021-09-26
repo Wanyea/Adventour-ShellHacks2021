@@ -1,11 +1,11 @@
-import { React, useState } from 'react';
+import { React } from 'react';
 import styled from 'styled-components';
 import SimpleMap from './SimpleMap';
 import Form from './Form';
 import GetLocation from './GetLocation';
 
 
-const StartAdventure = styled.div`
+const StartAdventureStyle = styled.div`
   padding: 10rem 0;
   .section__wrapper {
     display: flex;
@@ -52,21 +52,12 @@ const StartAdventure = styled.div`
 `
 
 
-export default function WelcomeSection() {
+export default function StartAdventure() {
 
     const location = GetLocation();
-    const [user,setUser] = useState({location: "", date : ""});
-
-    const onChange = e =>{
-        setUser({...user,[e.target.name] : e.target.value});
-    }
-
-    const onSubmit = e =>{
-        e.preventDefault();
-    }
 
     return (
-        <StartAdventure>
+        <StartAdventureStyle>
          <div className="sm-container">
             <Form />
             <div className="location">
@@ -76,7 +67,7 @@ export default function WelcomeSection() {
               </div>
         </div>
         <SimpleMap/>
-        </StartAdventure>
+        </StartAdventureStyle>
 
     )
 }
