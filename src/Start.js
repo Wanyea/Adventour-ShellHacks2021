@@ -1,8 +1,7 @@
 import { React } from 'react';
 import styled from 'styled-components';
-import SimpleMap from './SimpleMap';
 import Form from './Form';
-import GetLocation from './GetLocation';
+
 
 
 const StartAdventureStyle = styled.div`
@@ -54,19 +53,12 @@ const StartAdventureStyle = styled.div`
 
 export default function StartAdventure() {
 
-    const location = GetLocation();
 
     return (
         <StartAdventureStyle>
          <div className="sm-container">
             <Form />
-            <div className="location">
-                {location.loaded
-                  ? JSON.stringify(location)
-                  : "Location data not available yet."}
-              </div>
         </div>
-        <SimpleMap/>
         </StartAdventureStyle>
 
     )
