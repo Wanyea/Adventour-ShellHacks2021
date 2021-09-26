@@ -4,7 +4,9 @@ import PlacesAutocomplete, {
   geocodeByAddress,
   getLatLng
 } from "react-places-autocomplete";
+import Geocode from "react-geocode";
 import { useHistory } from 'react-router-dom';
+import GetLocation from './GetLocation';
 
 function Form(props) {
   const history = useHistory()
@@ -28,7 +30,7 @@ function Form(props) {
     const handleSubmit = e => {
       e.preventDefault();
       const formData = {
-        city: radiusEl.current.value,
+        range: radiusEl.current.value,
         date: dateEl.current.value,
         rememberMe: rememberMeEl.current.checked,
         lat: coordinates.lat,
@@ -40,10 +42,11 @@ function Form(props) {
     };
 
     return (
+      <div className="overall">
        <form onSubmit={handleSubmit}>
          <PlacesAutocomplete
         value={address}
-        onChange={setAddress}
+        onChange={handleSelect}
         onSelect={handleSelect}
       >
         {({ getInputProps, suggestions, getSuggestionItemProps, loading }) => (
@@ -79,6 +82,7 @@ function Form(props) {
          </label>
          <button type="submit" className="myButton">Plan My Adventure!</button>
        </form>
+       </div>
      );
   }
 

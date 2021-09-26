@@ -60,13 +60,7 @@ export default function StartAdventure() {
         <StartAdventureStyle>
          <div className="sm-container">
             <Form />
-            <div className="location">
-                {location.loaded
-                  ? JSON.stringify(location)
-                  : "Location data not available yet."}
-              </div>
         </div>
-        <SimpleMap/>
         </StartAdventureStyle>
 
     )
