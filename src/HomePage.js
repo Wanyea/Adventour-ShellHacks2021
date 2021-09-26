@@ -2,31 +2,9 @@ import React from 'react';
 import styled from 'styled-components';
 import BG from './sample-bg.jpg';
 import Button from './Button';
-import Text from './Text'
 import Header from './Header';
 
 function HomePage() {
-    const time = new Date().getHours();
-    let greetingMessage = 'Hello Wanyea'
-    setGreeting()
-    
-
-function setGreeting() {
-    //Morning
-    if(time < 12) {
-        greetingMessage = "Good Morning Wanyea"
-    
-    //Afternoon
-    } else if (time >= 12 && time < 18) {
-        greetingMessage = "Good Afternoon Wanyea"
-    
-    //Evening
-    } else if(time >= 18) {
-        greetingMessage = "Good Evening Wanyea"
-    } else {
-        greetingMessage = 'Hello Wanyea'
-    }
-}
 
 const HomeStyle = styled.div`
   .videoBG {

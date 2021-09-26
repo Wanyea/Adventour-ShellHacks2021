@@ -9,13 +9,10 @@ import List from './List';
 import Map from './Map'
 
 function Form(props) {
-  const [rating, setRating] = useState('');
+  const [rating] = useState('');
 
   const [filteredPlaces, setFilteredPlaces] = useState([]);
   const [places, setPlaces] = useState([]);
-
-  useEffect(() => {
-  }, []);
 
   useEffect(() => {
     const filtered = places;
