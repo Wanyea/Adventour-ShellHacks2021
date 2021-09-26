@@ -8,6 +8,7 @@ import { useHistory } from 'react-router-dom';
 import { getPlacesData } from './travelAPI';
 import { CssBaseline, Grid } from '@material-ui/core';
 import List from './List';
+import Map from './Map'
 
 function Form(props) {
   const [type, setType] = useState('restaurants');
@@ -106,7 +107,7 @@ function Form(props) {
        <form onSubmit={handleSubmit}>
          <PlacesAutocomplete
         value={address}
-        onChange={handleSelect}
+        onChange={setAddress}
         onSelect={handleSelect}
       >
         {({ getInputProps, suggestions, getSuggestionItemProps, loading }) => (
@@ -152,6 +153,10 @@ function Form(props) {
           />
         </Grid>
         <Grid item xs={12} md={8} style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+        <Map
+            coords={coordinates}
+            places={filteredPlaces.length ? filteredPlaces : places}
+          />
         </Grid>
       </Grid>
     </>
