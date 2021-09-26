@@ -1,6 +1,7 @@
 import { React, useState } from 'react';
 import styled from 'styled-components';
 import SimpleMap from './SimpleMap';
+import GetLocation from './GetLocation';
 
 
 const StartAdventure = styled.div`
@@ -51,6 +52,8 @@ const StartAdventure = styled.div`
 
 
 export default function WelcomeSection() {
+
+    const location = GetLocation();
     const [user,setUser] = useState({location: "", date : ""});
 
     const onChange = e =>{
@@ -81,9 +84,16 @@ export default function WelcomeSection() {
                 <button className="btn btn-lg btn-primary btn-block" 
                         type="submit"> Plan my adventure! </button>
             </form>
+
+            <div className="location">
+                {location.loaded
+                  ? JSON.stringify(location)
+                  : "Location data not available yet."}
+              </div>
         </div>
         <SimpleMap/>
         </StartAdventure>
 
     )
 }
+
