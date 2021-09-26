@@ -29,7 +29,7 @@ html {
     margin-top: 10px;
   }
   
-  html {
+  .bleh {
     background-image: url('./hotairbaloon.jpg');
     background-position: fixed;
     background-repeat: no-repeat;

@@ -1,62 +1,55 @@
 import React from "react";
-import PlacesAutocomplete from "react-places-autocomplete";
-import scriptLoader from "react-async-script-loader";
+import PlacesAutocomplete, {
+  geocodeByAddress,
+  getLatLng
+} from "react-places-autocomplete";
 
-function AutoC({ isScriptLoaded, isScriptLoadSucceed }) {
+export default function AutoC() {
   const [address, setAddress] = React.useState("");
+  const [coordinates, setCoordinates] = React.useState({
+    lat: null,
+    lng: null
+  });
 
-  const handleChange = (value) => {
-    setAddress(value)
-  }
+  const handleSelect = async value => {
+    const results = await geocodeByAddress(value);
+    const latLng = await getLatLng(results[0]);
+    setAddress(value);
+    setCoordinates(latLng);
+  };
 
-  const handleSelect = (value) => {
-    setAddress(value)
-  }
+  return (
+    <div>
+      <PlacesAutocomplete
+        value={address}
+        onChange={setAddress}
+        onSelect={handleSelect}
+      >
+        {({ getInputProps, suggestions, getSuggestionItemProps, loading }) => (
+          <div>
+            <p>Latitude: {coordinates.lat}</p>
+            <p>Longitude: {coordinates.lng}</p>
 
-  if (isScriptLoaded && isScriptLoadSucceed) {
-    return (
-      <div>
-        <PlacesAutocomplete
-          value={address}
-          onChange={handleChange}
-          onSelect={handleSelect}
-        >
-          {({
-            getInputProps,
-            suggestions,
-            getSuggestionItemProps,
-            loading,
-          }) => (
+            <input {...getInputProps({ placeholder: "Type address" })} />
+
             <div>
-              <input
-                {...getInputProps({
-                  placeholder: "Enter Address...",
-                })}
-              />
-              <div>
-                {loading && <div>Loading...</div>}
-                {suggestions.map((suggestion) => {
-                  const style = suggestion.active
-                    ? { backgroundColor: "#a83232", cursor: "pointer" }
-                    : { backgroundColor: "#ffffff", cursor: "pointer" };
+              {loading ? null : null}
 
-                  return (
-                    <div {...getSuggestionItemProps(suggestion, { style })}>
-                      {suggestion.description}
-                    </div>
-                  );
-                })}
-              </div>
+              {suggestions.map(suggestion => {
+                const style = {
+                  backgroundColor: suggestion.active ? "#41b6e6" : "#fff"
+                };
+
+                return (
+                  <div {...getSuggestionItemProps(suggestion, { style })}>
+                    {suggestion.description}
+                  </div>
+                );
+              })}
             </div>
-          )}
-        </PlacesAutocomplete>
-      </div>
-    );
-  } else {
-    return <div></div>;
-  }
+          </div>
+        )}
+      </PlacesAutocomplete>
+    </div>
+  );
 }
-
-export default scriptLoader([
-  `https://maps.googleapis.com/maps/api/js?key=AIzaSyBhMbvP6pFgIOQ1IdsvqoYBxFbA4W-Ir2k&libraries=places`,
-])(AutoC);

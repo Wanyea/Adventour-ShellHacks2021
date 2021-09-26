@@ -6,7 +6,7 @@ const GetLocation = () => {
         coordinates: { lat: "", lng: ""}
     });
 
-    const onSuccess = (location) => {
+    const onSuccess = location => {
         setLocation({
             loaded: true, 
             coordinates: {
