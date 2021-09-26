@@ -31,8 +31,7 @@ html {
   
   .bleh {
     background-image: url('./hotairbaloon.jpg');
-    background-position: fixed;
-    background-repeat: no-repeat;
+    
     background-size: cover;
     padding: 50px;
   }
