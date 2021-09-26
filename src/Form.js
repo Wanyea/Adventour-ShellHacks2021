@@ -1,11 +1,49 @@
 import React from 'react';
+import { useState, useEffect } from 'react';
 import './Form.css';
 import GetLocation from './GetLocation';
 import Geocode from "react-geocode";
 import PlacesAutocomplete, { geocodeByAddress, getLatLng } from "react-places-autocomplete";
 import { useHistory } from 'react-router-dom';
+import { getPlacesData } from './travelAPI';
+import { CssBaseline, Grid } from '@material-ui/core';
+import List from './List';
+import Map from './Map'
 
 function Form(props) {
+  const [type, setType] = useState('restaurants');
+  const [rating, setRating] = useState('');
+
+  //const [coords, setCoords] = useState({});
+  const [bounds, setBounds] = useState(null);
+
+  const [filteredPlaces, setFilteredPlaces] = useState([]);
+  const [places, setPlaces] = useState([]);
+
+  const [autocomplete, setAutocomplete] = useState(null);
+  const [childClicked, setChildClicked] = useState(null);
+  const [isLoading, setIsLoading] = useState(false);
+
+  useEffect(() => {
+    navigator.geolocation.getCurrentPosition(({ coordinates: { latitude, longitude } }) => {
+      setCoordinates({ lat: latitude, lng: longitude });
+    });
+  }, []);
+
+  useEffect(() => {
+    const filtered = places;
+
+    setFilteredPlaces(filtered);
+  }, [places, rating]);
+
+  const onPlaceChanged = () => {
+    const lat = coordinates.lat;
+    const lng = coordinates.lng;
+
+    setCoordinates({ lat, lng });
+  };
+
+  // old 
   const location = GetLocation().coordinates;
   const history = useHistory()
 
@@ -35,7 +73,7 @@ function Form(props) {
   const handleSelect = async value => {
     const results = await geocodeByAddress(value);
     const latLng = await getLatLng(results[0]);
-    console.log(latLng)
+    //console.log(latLng)
     setAddress(value);
     setCoordinates(latLng);
   };
@@ -53,9 +91,14 @@ function Form(props) {
         lat: coordinates.lat,
         long: coordinates.lng,
       }
-      console.log(formData);
       
-      history.push('/itinerary');
+      getPlacesData(coordinates, formData.range).then(data => {
+        setPlaces(data);
+      });
+      console.log(places);
+      onPlaceChanged();
+
+     // history.push('/itinerary');
     };
 
  
@@ -64,7 +107,7 @@ function Form(props) {
        <form onSubmit={handleSubmit}>
          <PlacesAutocomplete
         value={address}
-        onChange={handleSelect}
+        onChange={setAddress}
         onSelect={handleSelect}
       >
         {({ getInputProps, suggestions, getSuggestionItemProps, loading }) => (
@@ -100,6 +143,25 @@ function Form(props) {
          <button type="submit" className="myButton">Plan My Adventure!</button>
        </form>
     <button type="text" className="useMyLocation" onClick={assignAddress}>Use My Location.</button>
+
+    <>
+      <CssBaseline />
+      <Grid container spacing={3} style={{ width: '100%' }}>
+        <Grid item xs={12} md={4}>
+          <List
+            places = {places}
+          />
+        </Grid>
+        <Grid item xs={12} md={8} style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+        <Map
+            coords={coordinates}
+            places={filteredPlaces.length ? filteredPlaces : places}
+          />
+        </Grid>
+      </Grid>
+    </>
+
+
     </div>
      );
   }
