@@ -12,10 +12,8 @@ const List = ({ places }) => {
   return (
     <div className={classes.container}>
       <Typography variant="h4">Your Things to Do</Typography>
-      (
         <>
           <FormControl className={classes.formControl}>
-            <InputLabel id="type">Type</InputLabel>
             <Select id="type" value={type} onChange={(e) => setType(e.target.value)}>
               <MenuItem value="attractions">Attractions</MenuItem>
             </Select>
@@ -37,7 +35,6 @@ const List = ({ places }) => {
             ))}
           </Grid>
         </>
-      )
     </div>
   );
 };

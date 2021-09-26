@@ -2,6 +2,8 @@ import React from 'react';
 import styled from 'styled-components';
 import BG from './sample-bg.jpg';
 import Button from './Button';
+import Text from './Text'
+import Header from './Header';
 
 function HomePage() {
     const time = new Date().getHours();
@@ -28,7 +30,7 @@ function setGreeting() {
 
 const HomeStyle = styled.div`
   .videoBG {
-    z-index:1;
+    z-index: 1;
     position: fixed;
   }
   .welcome {
@@ -52,6 +54,11 @@ const HomeStyle = styled.div`
       display: inline-block;
       width: 100%;
     }
+    .divider {
+    width: 10000px;
+    height: auto;
+    display: flex;
+}
     .welcome__name {
       display: flex;
       font-family: 'Montserrat SemiBold';
@@ -190,17 +197,14 @@ const HomeStyle = styled.div`
 `;
 
     return (
+      <> <Header/>
         <HomeStyle>
-          <div className="videoBG"> <video autoplay muted loop>
-          <source src="./adventour.mp4" type="video/mp4"></source>
-           </video>  </div>
         <div className="welcome">
         <div className="welcome__heading">
             <h2> ADVENTOUR. </h2> </div>
             <Button btnText="START" btnLink="/start"/>
-
         </div>
-        </HomeStyle>
+        </HomeStyle> </>
     )
 }
 

@@ -15,9 +15,6 @@ function Form(props) {
   const [places, setPlaces] = useState([]);
 
   useEffect(() => {
-    navigator.geolocation.getCurrentPosition(({ coordinates: { latitude, longitude } }) => {
-      setCoordinates({ lat: latitude, lng: longitude });
-    });
   }, []);
 
   useEffect(() => {
@@ -29,7 +26,7 @@ function Form(props) {
   const onPlaceChanged = () => {
     const lat = coordinates.lat;
     const lng = coordinates.lng;
-
+    console.log(coordinates.lat);
     setCoordinates({ lat, lng });
   };
 
@@ -67,15 +64,11 @@ function Form(props) {
   };
 
     const radiusEl = React.useRef(null);
-    const dateEl = React.useRef(null);
-    const rememberMeEl = React.useRef(null);
   
     const handleSubmit = e => {
       e.preventDefault();
       const formData = {
         range: radiusEl.current.value,
-        date: dateEl.current.value,
-        rememberMe: rememberMeEl.current.checked,
         lat: coordinates.lat,
         long: coordinates.lng,
       }
@@ -97,8 +90,6 @@ function Form(props) {
       >
         {({ getInputProps, suggestions, getSuggestionItemProps, loading }) => (
           <div>
-            <p>Latitude: {coordinates.lat}</p>
-            <p>Longitude: {coordinates.lng}</p>
             <input {...getInputProps({ placeholder: "Type address" })} />
 
             <div>
@@ -119,15 +110,10 @@ function Form(props) {
           </div>
         )}
       </PlacesAutocomplete>
-         <input type="number" placeholder="Radius?" min={0} max={50} ref={radiusEl} /> <h5>mile radius </h5>
-         <input type="date" placeholder="When?" ref={dateEl} />
-         <label>
-           <input type="checkbox" ref={rememberMeEl} />
-           Remember this trip
-         </label>
+         <input type="number" placeholder="Radius?" min={0} max={50} ref={radiusEl} /> <p>mile radius </p>
          <button type="submit" className="myButton">Plan My Adventure!</button>
        </form>
-    <button type="text" className="useMyLocation" onClick={assignAddress}>Use My Location.</button>
+    <button type="text" className="myButton" onClick={assignAddress}>Use My Current Location</button>
 
     <>
       <CssBaseline />
@@ -145,8 +131,6 @@ function Form(props) {
         </Grid>
       </Grid>
     </>
-
-
     </div>
      );
   }
