@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import SimpleMap from './SimpleMap';
 import Form from './Form';
 import AutoC from './AutoC'
+import GetLocation from './GetLocation';
 
 
 const StartAdventure = styled.div`
@@ -53,6 +54,8 @@ const StartAdventure = styled.div`
 
 
 export default function WelcomeSection() {
+
+    const location = GetLocation();
     const [user,setUser] = useState({location: "", date : ""});
 
     const onChange = e =>{
@@ -67,10 +70,15 @@ export default function WelcomeSection() {
         <StartAdventure>
          <div className="sm-container">
             <Form />
-            <AutoC />
+            <div className="location">
+                {location.loaded
+                  ? JSON.stringify(location)
+                  : "Location data not available yet."}
+              </div>
         </div>
         <SimpleMap/>
         </StartAdventure>
 
     )
 }
+

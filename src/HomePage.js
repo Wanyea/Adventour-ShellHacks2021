@@ -189,6 +189,7 @@ const HomeStyle = styled.div`
         <HomeStyle>
         <div className="welcome">
             <h2> ADVENTOUR. </h2>
+              <br />
             <h2> {greetingMessage} </h2>
                 <br />
                 <div className="welcome__info">
