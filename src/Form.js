@@ -10,7 +10,6 @@ function Form(props) {
   const history = useHistory()
 
   function assignAddress() {
-
     Geocode.setApiKey("AIzaSyBhMbvP6pFgIOQ1IdsvqoYBxFbA4W-Ir2k")
     Geocode.setLanguage("en")
     Geocode.fromLatLng(location.lat.toString(), location.lng.toString()).then(
@@ -26,10 +25,6 @@ function Form(props) {
       )
   }
     
-      
-
-    
-  
   
   const [address, setAddress] = React.useState("");
   const [coordinates, setCoordinates] = React.useState({

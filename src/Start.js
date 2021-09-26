@@ -1,7 +1,7 @@
 import { React } from 'react';
 import styled from 'styled-components';
 import Form from './Form';
-import GetLocation from './GetLocation';
+
 
 
 const StartAdventureStyle = styled.div`
@@ -53,7 +53,6 @@ const StartAdventureStyle = styled.div`
 
 export default function StartAdventure() {
 
-    const location = GetLocation();
 
     return (
         <StartAdventureStyle>
