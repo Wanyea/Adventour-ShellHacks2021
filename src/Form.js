@@ -71,7 +71,7 @@ function Form(props) {
           </div>
         )}
       </PlacesAutocomplete>
-         <input type="text" placeholder="How far out are we willing to travel?" ref={radiusEl} />
+         <input type="number" placeholder="Radius?" min={0} max={50} ref={radiusEl} /> <h5>mile radius </h5>
          <input type="date" placeholder="When?" ref={dateEl} />
          <label>
            <input type="checkbox" ref={rememberMeEl} />

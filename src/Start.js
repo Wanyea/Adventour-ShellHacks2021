@@ -2,7 +2,6 @@ import { React, useState } from 'react';
 import styled from 'styled-components';
 import SimpleMap from './SimpleMap';
 import Form from './Form';
-import AutoC from './AutoC'
 import GetLocation from './GetLocation';
 
 
