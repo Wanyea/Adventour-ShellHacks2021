@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import './App.css';
 import Header from './Header';
 import HomePage from './HomePage';
+import Itinerary from './Itinerary';
 import Start from './Start';
 
 const App = () => {
@@ -20,6 +21,10 @@ const App = () => {
     <Route path="/start" exact>
             {' '}
             <Start />{' '}
+          </Route>
+    <Route path="/itinerary" exact>
+            {' '}
+            <Itinerary />{' '}
           </Route>
     </Switch>
     </Router>

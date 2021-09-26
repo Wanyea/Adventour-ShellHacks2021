@@ -20,8 +20,8 @@ const NavMenuStyle = styled.div`
 
 .nav-logo {
     height: 99px;
-    width: 120px;
-    margin-left: 15%;
+    width: 100px;
+    margin-left: 45%;
     align-items: left;
 }
 
