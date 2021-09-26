@@ -1,13 +1,36 @@
 import React from 'react';
 import './Form.css';
-import PlacesAutocomplete, {
-  geocodeByAddress,
-  getLatLng
-} from "react-places-autocomplete";
+import GetLocation from './GetLocation';
+import Geocode from "react-geocode";
+import PlacesAutocomplete, { geocodeByAddress, getLatLng } from "react-places-autocomplete";
 import { useHistory } from 'react-router-dom';
 
 function Form(props) {
+  const location = GetLocation().coordinates;
   const history = useHistory()
+
+  function assignAddress() {
+
+    Geocode.setApiKey("AIzaSyBhMbvP6pFgIOQ1IdsvqoYBxFbA4W-Ir2k")
+    Geocode.setLanguage("en")
+    Geocode.fromLatLng(location.lat.toString(), location.lng.toString()).then(
+      (response) => {
+        let value = response.results[0].formatted_address
+        setAddress(value)
+        setCoordinates(location)
+        console.log(value)
+      },
+          (error) => {
+          console.log(error)
+        }
+      )
+  }
+    
+      
+
+    
+  
+  
   const [address, setAddress] = React.useState("");
   const [coordinates, setCoordinates] = React.useState({
     lat: null,
@@ -17,6 +40,7 @@ function Form(props) {
   const handleSelect = async value => {
     const results = await geocodeByAddress(value);
     const latLng = await getLatLng(results[0]);
+    console.log(latLng)
     setAddress(value);
     setCoordinates(latLng);
   };
@@ -39,7 +63,9 @@ function Form(props) {
       history.push('/itinerary');
     };
 
+ 
     return (
+      <div>
        <form onSubmit={handleSubmit}>
          <PlacesAutocomplete
         value={address}
@@ -50,7 +76,6 @@ function Form(props) {
           <div>
             <p>Latitude: {coordinates.lat}</p>
             <p>Longitude: {coordinates.lng}</p>
-
             <input {...getInputProps({ placeholder: "Type address" })} />
 
             <div>
@@ -79,6 +104,10 @@ function Form(props) {
          </label>
          <button type="submit" className="myButton">Plan My Adventure!</button>
        </form>
+    
+    <button type="text" className="useMyLocation" onClick={assignAddress}>Use My Location.</button>
+
+    </div>
      );
   }
 
