@@ -188,11 +188,12 @@ const HomeStyle = styled.div`
     return (
         <HomeStyle>
         <div className="welcome">
+            <Button btnText="START" btnLink="/start"/>
             <h2> ADVENTOUR. </h2>
               <br />
                 <br />
                 <div className="welcome__info">
-                <Button btnText="START" btnLink="/start"/> </div>
+                 </div>
             
         </div>
         </HomeStyle>
