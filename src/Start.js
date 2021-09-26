@@ -1,18 +1,20 @@
-import { React, useState } from 'react';
+import { React } from 'react';
 import styled from 'styled-components';
 import SimpleMap from './SimpleMap';
+import Form from './Form';
+import GetLocation from './GetLocation';
 
 
-const StartAdventure = styled.div`
+const StartAdventureStyle = styled.div`
   padding: 10rem 0;
-  .contactSection__wrapper {
+  .section__wrapper {
     display: flex;
     gap: 5rem;
     margin-top: 7rem;
     justify-content: space-between;
     position: relative;
   }
-  .contactSection__wrapper::after {
+  .section__wrapper::after {
     position: absolute;
     content: '';
     width: 2px;
@@ -33,10 +35,10 @@ const StartAdventure = styled.div`
     /* padding-left: 3rem; */
   }
   @media only screen and (max-width: 768px) {
-    .contactSection__wrapper {
+    .section__wrapper {
       flex-direction: column;
     }
-    .contactSection__wrapper::after {
+    .section__wrapper::after {
       display: none;
     }
     .left,
@@ -50,40 +52,17 @@ const StartAdventure = styled.div`
 `
 
 
-export default function WelcomeSection() {
-    const [user,setUser] = useState({location: "", date : ""});
+export default function StartAdventure() {
 
-    const onChange = e =>{
-        setUser({...user,[e.target.name] : e.target.value});
-    }
-
-    const onSubmit = e =>{
-        e.preventDefault();
-    }
+    const location = GetLocation();
 
     return (
-        <StartAdventure>
+        <StartAdventureStyle>
          <div className="sm-container">
-            <form onSubmit={onSubmit}>
-                <h3>Let's Plan an Adventure!</h3>
-                <label htmlFor="location" className="sr-only">Where are we going? </label>
-                <input type="text" 
-                       name="location" 
-                       onChange={onChange} 
-                       className="form-control" 
-                       placeholder="Orlando, FL"/>
-                <label htmlFor="date" className="sr-only">When? </label>
-                <input type="date" 
-                       name="date" 
-                       onChange={onChange} 
-                       className="form-control" 
-                       placeholder="00/00/00"/>
-                <button className="btn btn-lg btn-primary btn-block" 
-                        type="submit"> Plan my adventure! </button>
-            </form>
+            <Form />
         </div>
-        <SimpleMap/>
-        </StartAdventure>
+        </StartAdventureStyle>
 
     )
 }
+

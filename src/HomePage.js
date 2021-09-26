@@ -26,10 +26,6 @@ function setGreeting() {
     }
 }
 
-function displayMessage() {
-    console.log("Hey, this button works!")
-}
-
 const HomeStyle = styled.div`
   .welcome {
     height: 100vh;
@@ -193,10 +189,11 @@ const HomeStyle = styled.div`
         <HomeStyle>
         <div className="welcome">
             <h2> ADVENTOUR. </h2>
+              <br />
             <h2> {greetingMessage} </h2>
                 <br />
                 <div className="welcome__info">
-                <Button btnText="START" btnLink="/start" /> </div>
+                <Button btnText="START" btnLink="/start"/> </div>
             
         </div>
         </HomeStyle>
