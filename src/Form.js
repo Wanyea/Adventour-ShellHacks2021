@@ -30,26 +30,10 @@ function Form(props) {
   }, []);
 
   useEffect(() => {
-    const filtered = places.filter((place) => Number(place.rating) > rating);
+    const filtered = places;
 
     setFilteredPlaces(filtered);
   }, [places, rating]);
-
-  useEffect(() => {
-    if (bounds) {
-      setIsLoading(true);
-
-      getPlacesData(coordinates, 25)
-        .then((data) => {
-          setPlaces(data.filter((place) => place.name && place.num_reviews > 0));
-          setFilteredPlaces([]);
-          setRating('');
-          setIsLoading(false);
-        });
-    }
-  }, [bounds]);
-
-  const onLoad = (autoC) => setAutocomplete(autoC);
 
   const onPlaceChanged = () => {
     const lat = coordinates.lat;
@@ -88,7 +72,7 @@ function Form(props) {
   const handleSelect = async value => {
     const results = await geocodeByAddress(value);
     const latLng = await getLatLng(results[0]);
-    console.log(latLng)
+    //console.log(latLng)
     setAddress(value);
     setCoordinates(latLng);
   };
@@ -106,10 +90,11 @@ function Form(props) {
         lat: coordinates.lat,
         long: coordinates.lng,
       }
-      //console.log(formData);
       
-      let brr = getPlacesData(coordinates, formData.range);
-      console.log(brr);
+      getPlacesData(coordinates, formData.range).then(data => {
+        setPlaces(data);
+      });
+      console.log(places);
       onPlaceChanged();
 
      // history.push('/itinerary');
@@ -163,13 +148,7 @@ function Form(props) {
       <Grid container spacing={3} style={{ width: '100%' }}>
         <Grid item xs={12} md={4}>
           <List
-            isLoading={isLoading}
-            childClicked={childClicked}
-            places={filteredPlaces.length ? filteredPlaces : places}
-            type='attractions'
-            setType={setType}
-            rating={rating}
-            setRating={setRating}
+            places = {places}
           />
         </Grid>
         <Grid item xs={12} md={8} style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
