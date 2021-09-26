@@ -193,7 +193,7 @@ const HomeStyle = styled.div`
             <h2> {greetingMessage} </h2>
                 <br />
                 <div className="welcome__info">
-                <Button btnText="START" btnLink="/start" /> </div>
+                <Button btnText="START" btnLink="/start"/> </div>
             
         </div>
         </HomeStyle>
