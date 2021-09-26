@@ -1,7 +1,7 @@
 import React from 'react';
 import { GoogleMap, LoadScript } from '@react-google-maps/api';
+
 const SimpleMap = () => {
-  
   const mapStyles = {        
     height: "100vh",
     width: "100%"};

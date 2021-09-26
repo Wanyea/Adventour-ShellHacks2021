@@ -26,10 +26,6 @@ function setGreeting() {
     }
 }
 
-function displayMessage() {
-    console.log("Hey, this button works!")
-}
-
 const HomeStyle = styled.div`
   .welcome {
     height: 100vh;
