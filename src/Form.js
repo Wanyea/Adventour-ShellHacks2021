@@ -6,7 +6,8 @@ import PlacesAutocomplete, { geocodeByAddress, getLatLng } from "react-places-au
 import { getPlacesData } from './travelAPI';
 import { CssBaseline, Grid } from '@material-ui/core';
 import List from './List';
-import Map from './Map'
+import Map from './Map';
+import Header from './Header';
 
 function Form(props) {
   const [rating] = useState('');
@@ -78,6 +79,8 @@ function Form(props) {
 
  
     return (
+      <>
+      <Header/>
       <div className="bleh">
        <form onSubmit={handleSubmit}>
          <PlacesAutocomplete
@@ -128,7 +131,7 @@ function Form(props) {
         </Grid>
       </Grid>
     </>
-    </div>
+    </div> </>
      );
   }
 
