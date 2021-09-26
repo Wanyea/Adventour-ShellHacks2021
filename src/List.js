@@ -1,18 +1,13 @@
-import React, { useState, useEffect, createRef } from 'react';
-import { CircularProgress, Grid, Typography, InputLabel, MenuItem, FormControl, Select } from '@material-ui/core';
+import React, { useState } from 'react';
+import { Grid, Typography, InputLabel, MenuItem, FormControl, Select } from '@material-ui/core';
 
 import PlaceDetails from './PlaceDetails';
 import useStyles from './liststyles.js';
 
 const List = ({ places }) => {
-  const [elRefs, setElRefs] = useState([]);
   const classes = useStyles();
   const [type, setType] = useState('attractions');
   const [rating, setRating] = useState('');
-
-  // useEffect(() => {
-  //   setElRefs((refs) => Array(places.length).fill().map((_, i) => refs[i] || createRef()));
-  // }, [places]);
 
   return (
     <div className={classes.container}>
@@ -36,13 +31,13 @@ const List = ({ places }) => {
           </FormControl>
           <Grid container spacing={3} className={classes.list}>
             {places?.map((place, i) => (
-              <Grid item key={i} item xs={12}>
+              <Grid item key={i} xs={12}>
                 <PlaceDetails place={place} />
               </Grid>
             ))}
           </Grid>
         </>
-      )}
+      )
     </div>
   );
 };

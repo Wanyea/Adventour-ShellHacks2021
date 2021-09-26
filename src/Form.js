@@ -1,28 +1,18 @@
-import React from 'react';
-import { useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import './Form.css';
 import GetLocation from './GetLocation';
 import Geocode from "react-geocode";
 import PlacesAutocomplete, { geocodeByAddress, getLatLng } from "react-places-autocomplete";
-import { useHistory } from 'react-router-dom';
 import { getPlacesData } from './travelAPI';
 import { CssBaseline, Grid } from '@material-ui/core';
 import List from './List';
 import Map from './Map'
 
 function Form(props) {
-  const [type, setType] = useState('restaurants');
   const [rating, setRating] = useState('');
-
-  //const [coords, setCoords] = useState({});
-  const [bounds, setBounds] = useState(null);
 
   const [filteredPlaces, setFilteredPlaces] = useState([]);
   const [places, setPlaces] = useState([]);
-
-  const [autocomplete, setAutocomplete] = useState(null);
-  const [childClicked, setChildClicked] = useState(null);
-  const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
     navigator.geolocation.getCurrentPosition(({ coordinates: { latitude, longitude } }) => {
@@ -45,7 +35,6 @@ function Form(props) {
 
   // old 
   const location = GetLocation().coordinates;
-  const history = useHistory()
 
   function assignAddress() {
     Geocode.setApiKey("AIzaSyBhMbvP6pFgIOQ1IdsvqoYBxFbA4W-Ir2k")
@@ -55,7 +44,6 @@ function Form(props) {
         let value = response.results[0].formatted_address
         setAddress(value)
         setCoordinates(location)
-        console.log(value)
       },
           (error) => {
           console.log(error)
@@ -95,10 +83,7 @@ function Form(props) {
       getPlacesData(coordinates, formData.range).then(data => {
         setPlaces(data);
       });
-      console.log(places);
       onPlaceChanged();
-
-     // history.push('/itinerary');
     };
 
  

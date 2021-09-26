@@ -18,6 +18,12 @@ const NavMenuStyle = styled.div`
     
 }
 
+.divider {
+    width: 5px;
+    height: auto;
+    display: inline-block;
+}
+
 .nav-logo {
     height: 99px;
     width: 100px;
@@ -34,13 +40,14 @@ const NavMenuStyle = styled.div`
 }
 
 .nav-link {
-    background-color: #d1d1d1;
-    color: black;
+    background-color: white;
+    opacity: 50%;
+    color: gray;
     padding: 20px 25px;
     text-align: center;
     text-decoration: none;
-    border: none;
-    border-radius: 60px;
+    border: 2px solid white ;
+    border-radius: 20px;
     opacity: 80%;
 }
 
@@ -63,7 +70,9 @@ export default function Header(props) {
     {/* Page Links */}
     <div className = "nav-items">
         <Link className = "nav-link" to='/'>Home</Link>
+        <div className="divider" />
         <Link className = "nav-link" to='/prev'>Previous Adventours</Link>
+        <div className="divider" />
         <Link className = "nav-link" to='/friends'>Friends</Link>
     </div>
 </div>

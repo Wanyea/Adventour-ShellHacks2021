@@ -27,6 +27,10 @@ function setGreeting() {
 }
 
 const HomeStyle = styled.div`
+  .videoBG {
+    z-index:1;
+    position: fixed;
+  }
   .welcome {
     height: 100vh;
     min-height: 700px;
@@ -41,8 +45,8 @@ const HomeStyle = styled.div`
     color: white;
   }
   .welcome__heading {
-    font-size: 2rem;
-    margin-bottom: -4rem;
+    font-size: 4rem;
+    margin-bottom: 7rem;
     position: relative;
     span {
       display: inline-block;
@@ -130,7 +134,7 @@ const HomeStyle = styled.div`
       min-height: 750px;
     }
     .welcome__heading {
-      font-size: 2.4rem;
+      font-size: 4.4rem;
       margin-bottom: -3rem;
       .welcome__name {
         font-size: 4.5rem;
@@ -187,14 +191,14 @@ const HomeStyle = styled.div`
 
     return (
         <HomeStyle>
+          <div className="videoBG"> <video autoplay muted loop>
+          <source src="./adventour.mp4" type="video/mp4"></source>
+           </video>  </div>
         <div className="welcome">
+        <div className="welcome__heading">
+            <h2> ADVENTOUR. </h2> </div>
             <Button btnText="START" btnLink="/start"/>
-            <h2> ADVENTOUR. </h2>
-              <br />
-                <br />
-                <div className="welcome__info">
-                 </div>
-            
+
         </div>
         </HomeStyle>
     )

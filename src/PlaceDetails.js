@@ -35,7 +35,9 @@ const PlaceDetails = ({ place }) => {
         </Typography>
       </Box>
       {place?.awards?.map((award) => (
+        // eslint-disable-next-line react/jsx-no-comment-textnodes
         <Box display="flex" justifyContent="space-between" my={1} alignItems="center">
+          // eslint-disable-next-line jsx-a11y/alt-text
           <img src={award.images.small} />
           <Typography variant="subtitle2" color="textSecondary">{award.display_name}</Typography>
         </Box>

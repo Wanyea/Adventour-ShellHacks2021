@@ -6,12 +6,12 @@ const ButtonStyle = styled.div`
   margin-top: 2rem;
   .button {
     font-size: 1.9rem;
-    background-color: #d1d1d1;
+    //background-color: #d1d1d1;
     padding: 0.7em 2em;
     border: 2px solid #d1d1d1;
-    border-radius: 25px;
+    border-radius: 5px;
     display: inline-block;
-    color: black;
+    color: white;
     margin-left: 35%;
     margin-bottom: 70%;
   }
